@@ -1,0 +1,55 @@
+@charset "UTF-8";
+#number {
+  width: 3em;
+}
+.replySign {
+	color: red;
+}
+/*全体*/
+.hidden_box {
+    margin: 2em 0;/*前後の余白*/
+    padding: 0;
+}
+
+/*ボタン装飾*/
+.hidden_box label {
+  position: relative;
+  display: block;
+  padding: 1em 1em 1em 1em;
+  width: 40px;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  line-height: 1;
+  background: #ffc8ff;
+  background: linear-gradient(to right, #ffc8ff, #ff22ff);
+  text-indent: 0.1em;
+  letter-spacing: 0.1em;
+  border-radius: 1.5em;
+}
+
+/*ボタンホバー時*/
+.hidden_box label:hover {
+    background: #80ffff;
+}
+
+/*チェックは見えなくする*/
+input[type="checkbox"] {
+    display: none;
+}
+
+/*中身を非表示にしておく*/
+.hidden_box .hidden_show {
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.8s;
+}
+
+/*クリックで中身表示*/
+.hidden_box input:checked ~ .hidden_show {
+    padding: 10px 0;
+    height: auto;
+    opacity: 1;
+}

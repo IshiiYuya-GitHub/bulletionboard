@@ -1,0 +1,21 @@
+@charset "UTF-8";
+.split{
+    display: table;
+    width: 100%;
+}
+.split-item{
+    display: table-cell;
+    padding: 80px;
+    width: 30%;
+}
+.split-left{
+    position: relative;
+}
+.split-left__inner{
+    height: 100%;
+    position: fixed;
+    width: 30%;
+}
+textarea {
+  resize: none;
+}
