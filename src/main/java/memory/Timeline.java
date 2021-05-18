@@ -6,12 +6,15 @@ public class Timeline {
 	private String text;
 	private boolean isDeleted;
 
+	public Timeline() {}
+
 	public Timeline (int id, String name, String text, boolean isDeleted) {
 		this.id = id;
 		this.name = name;
 		this.text = text;
 		this.isDeleted = isDeleted;
 	}
+
 
 	public int getId() {
 		return id;

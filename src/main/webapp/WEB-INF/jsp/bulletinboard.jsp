@@ -29,7 +29,7 @@ ArrayList<Reply> reply = (ArrayList<Reply>) request.getAttribute("reply");
 			</p>
 			<p>
 			<b>&lt;テキスト&gt;</b><br>
-			<textarea name="text" rows="10" cols="30" id="mainPostingText" required></textarea>
+			<textarea name="text" rows="10" cols="30" id="mainPostingText" maxlength="255" required></textarea>
 			</p>
 			<p>
 			<b>&lt;パスワード&gt;</b>(8~20字でスペースは不可)<br>
@@ -48,20 +48,19 @@ ArrayList<Reply> reply = (ArrayList<Reply>) request.getAttribute("reply");
 			<% if (timeline != null) { %>
 				<div class="edit" id="edit">
 				<% for (Timeline tl: timeline) {
-						if(tl.isDeleted() == false) {%>
-							<div class="test" id="test<%=tl.getId()%>">
-							<span id="mainRemoveDeleteCheck<%=tl.getId()%>">&lt;<%=tl.getId() %>&gt; <span style="margin-right: 1em;"></span><%=tl.getName() %>: <span id= "mainText<%=tl.getId()%>"><%=tl.getText() %></span><!-- mainText --><span style="margin-right: 1em;"></span><br>
-
+						if(tl.isDeleted() == false) { %>
+							<div class="main" id="main<%=tl.getId()%>">
+							<span id="mainRemoveDeleteCheck<%=tl.getId()%>"><span class="margin-right1">&lt;<%=tl.getId()%>&gt;</span><%=tl.getName()%>: <span id= "mainText<%=tl.getId()%>" class="mainText"><%=tl.getText()%></span><!-- mainText --><br>
 							<div class="hidden_box">
 								<label for="edit<%=tl.getId()%>">編集</label>
-								<input type="checkbox" id="edit<%=tl.getId()%>"/>
+								<input type="checkbox" class="checkboxes" id="edit<%=tl.getId()%>"/>
 									<div class="hidden_show">
 										<div class="mainEditForm" >
 										<input type="hidden" name="mainEditId" value="<%=tl.getId()%>" class="editID" id="mainEditId<%=tl.getId()%>">
 										<b>&lt;テキスト&gt;</b><br>
-										<textarea name="mainEditText" rows="10" cols="30" id="mainEditText<%=tl.getId()%>"required><%=tl.getText()%></textarea><br>
+										<textarea name="mainEditText" rows="10" cols="30" id="mainEditText<%=tl.getId()%>" maxlength="255" required><%=tl.getText()%></textarea><br>
 										<b>&lt;パスワード確認&gt;</b><br>
-										<input type="password" name="mainEditPass" size="20" minlength="6" maxlength="20" id="mainEditPass<%=tl.getId() %>" required>
+										<input type="password" name="mainEditPass" size="20" minlength="6" maxlength="20" id="mainEditPass<%=tl.getId()%>" required>
 										<br><br>
 										<button class="mainEditPosting" id="mainEditPosting<%=tl.getId()%>">送信</button>
 										</div><!-- mainEditForm -->
@@ -69,8 +68,8 @@ ArrayList<Reply> reply = (ArrayList<Reply>) request.getAttribute("reply");
 							</div><!-- hidden_box -->
 
 							<div class="hidden_box">
-								<label for="mainRemoveDelete<%=tl.getId() %>">削除</label>
-								<input type="checkbox" id="mainRemoveDelete<%=tl.getId()%>"/>
+								<label for="mainRemoveDelete<%=tl.getId()%>">削除</label>
+								<input type="checkbox" class="checkboxes" id="mainRemoveDelete<%=tl.getId()%>"/>
     							<div class="hidden_show">
       								<div class="mainRemoveDeleteForm">
       								<input type="hidden" name="mainRemoveDeleteId" value="<%=tl.getId()%>" id="mainRemoveDeleteId<%=tl.getId()%>">
@@ -86,46 +85,45 @@ ArrayList<Reply> reply = (ArrayList<Reply>) request.getAttribute("reply");
 							</div><!-- hidden_box -->
 
 							<div class="hidden_box">
-   			 					<label for="label<%=tl.getId() %>">返信</label>
-    							<input type="checkbox" id="label<%=tl.getId()%>"/>
+   			 					<label for="label<%=tl.getId()%>">返信</label>
+    							<input type="checkbox" class="checkboxes" id="label<%=tl.getId()%>"/>
    								<div class="hidden_show">
 									<div class="replyForm">
 										<input type="hidden" name="replyId" value="<%=tl.getId()%>" id="replyId<%=tl.getId()%>"><br>
 										<b>&lt;名前&gt;</b>(スペースは使用不可)<br>
 										<input type="text" name="replyPostingName" size="20" maxlength="20" id="replyPostingName<%=tl.getId()%>" required><br>
 										<b>&lt;テキスト&gt;</b><br>
-										<textarea name="replyPostingText" rows="10" cols="30" id="replyPostingText<%=tl.getId()%>"required></textarea><br>
+										<textarea name="replyPostingText" rows="10" cols="30" id="replyPostingText<%=tl.getId()%>" maxlength="255" required></textarea><br>
 										<b>&lt;パスワード&gt;</b>(8~20字でスペースは不可)<br>
 										<input type="password" name="replyPostingPass" size="20" minlength="6" maxlength="20" id="replyPostingPass<%=tl.getId()%>"required><br><br>
 										<button class="replyPosting" id="replyPosting<%=tl.getId()%>">返信</button><br>
 									</div><!-- replyForm -->
 			    				</div><!-- hidden_show -->
 							</div><!-- hidden_box -->
-							</span>
-							</div>
-						<%} %>
+							</span><!-- mainRemoveDeleteCheck -->
+
 					<br><% if (reply != null) {
 							 for (Reply rp: reply) {
-							 	if (rp.getReplyId() == tl.getId() && rp.isDeleted() == false) {%>
-							 		 <span id="replyRemoveDeleteCheck<%=rp.getId()%>"><span style="margin-right: 3em;"></span><span class="replySign">&#8658;<span style="margin-right: 1em;"></span><%=rp.getName() %></span>: <span id="replyText<%=rp.getId()%>"><%=rp.getText()%></span><br>
+							 	if (rp.getReplyId() == tl.getId() && rp.isDeleted() == false) { %>
+							 		 <span id="replyRemoveDeleteCheck<%=rp.getId()%>"><span class="margin-right3"></span><span class="replySign">&#8658;<span class="margin-right1"></span><%=rp.getName()%></span>: <span id="replyText<%=rp.getId()%>" class="replyText"><%=rp.getText()%></span><br>
 							 		 <div class="hidden_box">
 									 <label for="replyEdit<%=rp.getId()%>">編集</label>
-									 <input type="checkbox" id="replyEdit<%=rp.getId()%>"/>
+									 <input type="checkbox" class="checkboxes" id="replyEdit<%=rp.getId()%>"/>
 										<div class="hidden_show">
 										 	<div class="replyEditForm">
 												<input type="hidden" name="replyEditId" value="<%=rp.getId()%>" class="editId" id="replyEditId<%=rp.getId()%>">
-												<span style="margin-right: 3em;"></span><b>&lt;テキスト&gt;</b><br>
-											 	<span style="margin-right: 3em;"></span><textarea name="replyEditText" id="replyEditText<%=rp.getId() %>" rows="10" cols="30" required><%=rp.getText()%></textarea><br>
-											 	<span style="margin-right: 3em;"></span><b>&lt;パスワード確認&gt;</b><br>
-												<span style="margin-right: 3em;"></span><input type="password" name="replyEditPass" id="replyEditPass<%=rp.getId() %>" size="20" minlength="6" maxlength="20" required><br>
-												<span style="margin-right: 3em;"></span><button class="replyEditPosting" id="replyEditPosting<%=rp.getId()%>">送信</button>
+												<b>&lt;テキスト&gt;</b><br>
+											 	<textarea name="replyEditText" id="replyEditText<%=rp.getId()%>" rows="10" cols="30" maxlength="255" required><%=rp.getText()%></textarea><br>
+											 	<b>&lt;パスワード確認&gt;</b><br>
+												<input type="password" name="replyEditPass" id="replyEditPass<%=rp.getId()%>" size="20" minlength="6" maxlength="20" required><br><br>
+												<button class="replyEditPosting" id="replyEditPosting<%=rp.getId()%>">送信</button>
 											</div><!-- replyEditForm -->
 										</div><!-- hidden_show -->
 									  </div><!-- hidden_box -->
 
 									  <div class="hidden_box">
 										<label for="replyRemoveDelete<%=rp.getId()%>">削除</label>
-										<input type="checkbox" id="replyRemoveDelete<%=rp.getId()%>"/>
+										<input type="checkbox" class="checkboxes" id="replyRemoveDelete<%=rp.getId()%>"/>
 											<div class="hidden_show">
 											 	<div class="replyRemoveDeleteForm">
 					      							<input type="hidden" name="replyRemoveDeleteId" value="<%=rp.getId()%>" id="replyRemoveDeleteId<%=rp.getId()%>">
@@ -140,12 +138,12 @@ ArrayList<Reply> reply = (ArrayList<Reply>) request.getAttribute("reply");
 											</div><!-- hidden_show -->
 									  </div><!-- hidden_box -->
 									  </span>
-								<%}
-							 }
-						}%>
-
-					<% }
-			%>
+							<% }
+							 } %>
+					   <% } %>
+					   </div>
+					   <% } %>
+					<% } %>
 				</div><!--edit-->
 		<% } %>
         </div><!--split-right__inner-->

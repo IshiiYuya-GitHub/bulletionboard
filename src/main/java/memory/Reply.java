@@ -1,13 +1,15 @@
 package memory;
 
-public class Reply {
+public class Reply extends Timeline {
 	private int replyId;
 	private int id;
 	private String name;
 	private String text;
 	private boolean isDeleted;
 
+
 	public Reply (int replyId, int id, String name, String text, boolean isDeleted) {
+		super();
 		this.replyId = replyId;
 		this.id = id;
 		this.name = name;

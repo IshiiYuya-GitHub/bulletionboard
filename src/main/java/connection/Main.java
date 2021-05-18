@@ -51,10 +51,8 @@ public class Main extends HttpServlet {
 
 		// コメントの取得
 		try(Connection conn2 = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS)) {
-			String sql2 =
-					"SELECT id, name, text, is_deleted FROM bulletinboard ORDER BY id ASC";
-			String sql3 =
-					"SELECT replyid, id, name, text, is_deleted FROM reply ORDER BY replyid ASC";
+			String sql2 = "SELECT id, name, text, is_deleted FROM bulletinboard ORDER BY id ASC";
+			String sql3 = "SELECT replyid, id, name, text, is_deleted FROM reply ORDER BY replyid ASC";
 			PreparedStatement pStmt2 = conn2.prepareStatement(sql2);
 			PreparedStatement pStmt3 = conn2.prepareStatement(sql3);
 

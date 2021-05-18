@@ -19,3 +19,6 @@
 textarea {
   resize: none;
 }
+.mainText, .replyText {
+	word-break: break-all;
+}

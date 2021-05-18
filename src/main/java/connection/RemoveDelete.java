@@ -122,6 +122,12 @@ public class RemoveDelete extends HttpServlet {
 				PreparedStatement pStmt3 = conn3.prepareStatement(sql3);
 				pStmt3.setInt(1, mainRemoveDeleteId);
 				pStmt3.executeUpdate();
+				try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS)) {
+					String sql = "UPDATE reply SET `is_deleted` = 1 WHERE replyid = ?";
+					PreparedStatement pStmt = conn.prepareStatement(sql);
+					pStmt.setInt(1, mainRemoveDeleteId);
+					pStmt.executeUpdate();
+				}
 				resultCheck+=2;
 			} catch (SQLException e) {
 				e.printStackTrace();
